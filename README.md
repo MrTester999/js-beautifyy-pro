@@ -32,6 +32,22 @@ telemetry, or remote analysis service.
 > Secret detection can produce false positives. Only analyze systems you own or
 > are authorized to test.
 
+## Screenshots
+
+### JavaScript intelligence workspace
+
+![JS Beautifyy Pro workspace with syntax highlighting and static findings](screenshots/js-beautifyy-workspace.png)
+
+### Masked secret review
+
+![JS Beautifyy Pro masked secret findings](screenshots/js-beautifyy-secrets.png)
+
+### Extension popup
+
+<p align="center">
+  <img src="screenshots/js-beautifyy-popup.png" width="390" alt="JS Beautifyy Pro Chrome extension popup">
+</p>
+
 ## Features
 
 ### Code workspace
