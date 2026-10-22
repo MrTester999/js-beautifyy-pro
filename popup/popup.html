@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>JS Beautifyy Pro</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo"><span>JS</span><i>{ }</i></div>
+      <div><h1>JS Beautifyy</h1><p>Beautify · Map · Review</p></div>
+      <b>PRO</b>
+      <label class="master-switch" title="Enable or disable JS Beautifyy Pro">
+        <input id="enableTool" type="checkbox" checked>
+        <span></span>
+      </label>
+    </header>
+
+    <section class="page-card">
+      <div class="pulse"></div>
+      <div><small>CURRENT PAGE</small><strong id="pageTitle">Checking page…</strong><span id="pageUrl">—</span></div>
+    </section>
+
+    <button id="analyzePage" class="primary" type="button"><span>◎</span><div><strong>Analyze page JavaScript</strong><small>Collect inline and external scripts</small></div><b>→</b></button>
+    <button id="openWorkspace" class="secondary" type="button"><span>{ }</span><div><strong>Open workspace</strong><small>Paste, upload, or fetch a JS file</small></div><b>→</b></button>
+
+    <div class="feature-grid">
+      <div><strong>Beautify</strong><span>Readable formatting</span></div>
+      <div><strong>Discover</strong><span>URLs &amp; parameters</span></div>
+      <div><strong>Review</strong><span>Secrets &amp; signals</span></div>
+    </div>
+
+    <footer><span id="toolState">◆ Tool enabled · Local-only analysis</span><small>v1.4.2</small></footer>
+  </main>
+  <div id="status" role="status"></div>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

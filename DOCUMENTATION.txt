@@ -1,0 +1,94 @@
+JS BEAUTIFYY PRO v1.4.2
+=======================
+
+DESCRIPTION
+-----------
+JS Beautifyy Pro is a privacy-focused Chrome extension that converts minified
+JavaScript into readable, syntax-highlighted code and performs local static
+analysis. It extracts candidate endpoints, URLs, parameters, scripts, sensitive
+paths, secrets, and security-relevant signals without executing imported code.
+
+INSTALLATION
+------------
+1. Open Chrome and navigate to: chrome://extensions
+2. Enable Developer mode.
+3. Select Load unpacked.
+4. Choose:
+   /home/mo/bugbounty/09-tools/js-beautifyy-pro
+5. Pin JS Beautifyy Pro from the Extensions menu.
+
+If the extension is already loaded, press Reload after updating its files.
+
+ZIP PACKAGE
+-----------
+Extract this ZIP before using Load unpacked:
+/home/mo/bugbounty/09-tools/js-beautifyy-pro/dist/js-beautifyy-pro-1.4.2.zip
+
+ANALYZE A WEBSITE
+-----------------
+1. Open an authorized website.
+2. Select the extension icon.
+3. Press Analyze page JavaScript.
+4. Use Beautify & analyze for one source or Analyze all for all sources.
+
+ANALYZE AN OPENED JAVASCRIPT FILE
+---------------------------------
+1. Open a .js, .mjs, or .cjs URL in Chrome.
+2. Select the extension icon.
+3. Press Beautify this JavaScript file.
+4. The extension imports, formats, and analyzes it automatically.
+
+ANALYZE A LOCAL FILE
+--------------------
+For files opened using file://, open the extension Details page and enable
+Allow access to file URLs. You can also upload the file from the workspace.
+
+USE A TXT FILE
+--------------
+The extension accepts TXT files containing JavaScript:
+1. Open the workspace.
+2. Press Upload.
+3. Choose the .txt file.
+4. Press Beautify & analyze.
+
+You may also drag the TXT file into the workspace or paste its contents.
+
+RESULT CATEGORIES
+-----------------
+Endpoints  - API paths, routes, request targets, and network destinations.
+URLs       - Absolute HTTP(S) and WebSocket URLs.
+Parameters - Query keys, FormData fields, request fields, and JSON body keys.
+Scripts    - Referenced JavaScript assets.
+Sensitive  - Interesting administrative, internal, debug, and auth paths.
+Secrets    - Potential API keys, tokens, JWTs, private keys, and credentials.
+Signals    - JavaScript sources, sinks, and patterns requiring manual review.
+
+Secrets are masked by default. Findings are indicators and may include false
+positives; verify them manually.
+
+EXPORT
+------
+Export JSON - structured analysis results.
+Export TXT  - readable text report.
+Download    - currently visible source or beautified JavaScript.
+
+SHORTCUTS
+---------
+Alt+Shift+J       Open workspace
+Ctrl+Enter        Analyze current source
+Ctrl+Shift+Enter  Analyze all sources
+Ctrl+K            Search findings
+Ctrl+O            Upload a file
+Ctrl+F            Search inside the code editor
+
+ENABLE OR DISABLE
+-----------------
+Use the switch in the top-right of the extension popup. Disabling stops analysis,
+URL imports, context-menu actions, badges, and workspace actions.
+
+PRIVACY AND LIMITS
+------------------
+- Analysis runs locally and imported JavaScript is not executed.
+- Maximum size is 8 MB per source and 24 MB per page scan.
+- No telemetry or remote analysis service is used.
+- Only analyze systems for which you have authorization.

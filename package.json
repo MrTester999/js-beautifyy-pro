@@ -1,0 +1,26 @@
+{
+  "name": "js-beautifyy-pro",
+  "version": "1.4.2",
+  "private": true,
+  "type": "module",
+  "description": "Local-first JavaScript beautifier and static asset intelligence workspace.",
+  "scripts": {
+    "vendor": "node scripts/vendor.mjs",
+    "editor": "node scripts/editor-bundle.mjs",
+    "check": "node scripts/check.mjs",
+    "build": "npm run vendor && npm run editor && npm run check"
+  },
+  "dependencies": {
+    "@codemirror/commands": "6.11.1",
+    "@codemirror/lang-javascript": "6.2.5",
+    "@codemirror/language": "6.12.1",
+    "@codemirror/state": "6.7.6",
+    "@codemirror/view": "6.43.15",
+    "@lezer/highlight": "1.2.1",
+    "codemirror": "6.0.2",
+    "js-beautify": "2.0.3"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.11"
+  }
+}

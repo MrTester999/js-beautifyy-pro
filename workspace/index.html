@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>JS Beautifyy Pro</title>
+  <link rel="stylesheet" href="workspace.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="source-panel">
+      <div class="brand">
+        <div class="brand-mark"><span>JS</span><i>{ }</i></div>
+        <div><h1>JS Beautifyy</h1><p>Local code intelligence</p></div>
+        <span class="pro-pill">PRO</span>
+      </div>
+
+      <div class="privacy-card"><span class="privacy-icon">◆</span><div><strong>Private by design</strong><small>Analysis stays inside this browser.</small></div></div>
+
+      <div class="import-grid">
+        <button id="newSource" class="import-btn" type="button"><b>＋</b><span>New</span></button>
+        <button id="uploadTrigger" class="import-btn" type="button"><b>⇧</b><span>Upload</span></button>
+        <button id="pasteSource" class="import-btn" type="button"><b>⌘</b><span>Paste</span></button>
+        <button id="scanPage" class="import-btn accent" type="button"><b>◎</b><span>Page JS</span></button>
+      </div>
+      <input id="fileInput" type="file" accept=".js,.mjs,.cjs,.txt,text/plain,text/javascript,application/javascript" multiple hidden>
+
+      <form id="urlForm" class="url-form">
+        <label for="urlInput">Load JavaScript URL</label>
+        <div><input id="urlInput" type="url" placeholder="https://target.tld/app.js" autocomplete="off"><button type="submit" title="Fetch URL">→</button></div>
+      </form>
+
+      <div class="sources-head"><span>Sources</span><strong id="sourceCount">0</strong></div>
+      <div id="sourceList" class="source-list"></div>
+      <div id="dropZone" class="drop-zone"><strong>Drop JavaScript or TXT files</strong><span>Up to 8 MB per file</span></div>
+
+      <div class="side-footer"><span id="libraryVersion">js-beautify 2.0.3</span><button id="clearAll" type="button">Clear workspace</button></div>
+    </aside>
+
+    <main class="editor-panel">
+      <header class="topbar">
+        <div class="file-heading"><span id="sourceKind" class="kind-dot"></span><div><h2 id="activeName">Untitled.js</h2><p id="activeMeta">Ready for JavaScript</p></div></div>
+        <div class="top-actions">
+          <button id="copyCode" class="ghost" type="button" title="Copy visible code"><span class="button-icon">⧉</span>Copy</button>
+          <button id="downloadCode" class="ghost" type="button" title="Download visible code"><span class="button-icon">↓</span>Download</button>
+          <button id="analyzeAll" class="secondary" type="button" title="Analyze all sources (Ctrl+Shift+Enter)"><span class="button-icon">◎</span>Analyze all</button>
+          <button id="runAnalysis" class="primary" type="button" title="Beautify and analyze current source (Ctrl+Enter)"><span>✦</span> Beautify &amp; analyze <kbd>⌃↵</kbd></button>
+        </div>
+      </header>
+
+      <section class="editor-toolbar">
+        <div class="view-tabs" role="tablist">
+          <button id="sourceTab" class="active" type="button">Source</button>
+          <button id="formattedTab" type="button">Beautified</button>
+        </div>
+        <div class="format-options">
+          <label>Indent <select id="indentSize"><option value="2">2 spaces</option><option value="4">4 spaces</option><option value="tab">Tabs</option></select></label>
+          <label>Braces <select id="braceStyle"><option value="collapse">Collapse</option><option value="expand">Expand</option><option value="end-expand">End expand</option></select></label>
+          <label class="check"><input id="preserveNewlines" type="checkbox" checked><span>Preserve lines</span></label>
+        </div>
+      </section>
+
+      <section id="editorWrap" class="editor-wrap">
+        <div id="lineNumbers" class="line-numbers" aria-hidden="true">1</div>
+        <textarea id="codeEditor" spellcheck="false" autocomplete="off" autocapitalize="off" aria-label="JavaScript editor" placeholder="Paste minified JavaScript here, upload a file, fetch a URL, or scan the current page…"></textarea>
+        <div id="codeEditorMount" class="code-editor-host"></div>
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon">{<b>JS</b>}</div>
+          <h3>Drop in any JavaScript</h3>
+          <p>Beautify minified code and discover its network surface, parameters, assets, security signals, and credential candidates.</p>
+          <div><button id="emptyUpload" type="button">Choose files</button><button id="emptyPaste" type="button">Paste code</button></div>
+        </div>
+      </section>
+
+      <footer class="editor-status">
+        <span id="editorPosition">Ln 1, Col 1</span>
+        <span id="editorStats">0 lines · 0 B</span>
+        <span class="local-badge">LOCAL ONLY</span>
+      </footer>
+    </main>
+
+    <aside class="intel-panel">
+      <header class="intel-head"><div><span>STATIC ANALYSIS</span><h2>Intelligence</h2></div><button id="collapseIntel" type="button" title="Toggle panel">›</button></header>
+
+      <div class="score-card">
+        <div class="score-ring"><strong id="findingTotal">0</strong><span>findings</span></div>
+        <div class="score-meta"><strong id="analysisState">Not analyzed</strong><span id="analysisTime">Run local analysis to begin</span><small id="sourceScope">Current source</small></div>
+      </div>
+
+      <div class="metric-grid">
+        <div><span>Endpoints</span><strong id="metricEndpoints">0</strong></div>
+        <div><span>Parameters</span><strong id="metricParameters">0</strong></div>
+        <div><span>Secrets</span><strong id="metricSecrets">0</strong></div>
+        <div><span>Signals</span><strong id="metricSignals">0</strong></div>
+      </div>
+
+      <div class="severity-strip" aria-label="Finding severity summary">
+        <span class="critical"><i></i>Critical <b id="severityCritical">0</b></span>
+        <span class="high"><i></i>High <b id="severityHigh">0</b></span>
+        <span class="medium"><i></i>Medium <b id="severityMedium">0</b></span>
+        <span class="info"><i></i>Info <b id="severityInfo">0</b></span>
+      </div>
+
+      <div class="filter-row">
+        <div class="search-box"><span>⌕</span><input id="findingSearch" type="search" placeholder="Filter findings…"></div>
+        <select id="resultScope" title="Result scope"><option value="current">Current</option><option value="all">All sources</option></select>
+      </div>
+
+      <div id="categoryTabs" class="category-tabs"></div>
+
+      <label class="reveal-control"><input id="revealSecrets" type="checkbox"><span>Reveal sensitive values locally</span></label>
+
+      <div id="findings" class="findings"><div class="no-findings"><span>⌁</span><strong>No analysis results yet</strong><p>Run Beautify &amp; Analyze to map this JavaScript file.</p></div></div>
+
+      <div class="export-bar"><button id="exportJson" type="button"><span>{ }</span> Export JSON</button><button id="exportText" type="button"><span>≡</span> Export TXT</button></div>
+    </aside>
+  </div>
+
+  <div id="toast" class="toast" role="status"></div>
+  <div id="busy" class="busy" aria-hidden="true"><div class="spinner"></div><strong id="busyTitle">Analyzing JavaScript…</strong><span id="busyDetail">Running locally</span></div>
+  <div class="shortcut-hint" aria-hidden="true"><kbd>Ctrl</kbd><kbd>Enter</kbd><span>Analyze</span><i></i><kbd>Ctrl</kbd><kbd>K</kbd><span>Search</span></div>
+  <script type="module" src="workspace.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "JS Beautifyy Pro",
+  "version": "1.4.2",
+  "description": "Beautify JavaScript and locally extract endpoints, parameters, URLs, script files, and potential secrets.",
+  "minimum_chrome_version": "120",
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": ["http://*/*", "https://*/*", "file:///*"],
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "JS Beautifyy Pro",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "commands": {
+    "open-workspace": {
+      "suggested_key": {
+        "default": "Alt+Shift+J"
+      },
+      "description": "Open JS Beautifyy Pro workspace"
+    }
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; worker-src 'self'"
+  }
+}

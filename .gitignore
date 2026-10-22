@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+*.log
+
+# Keep the current release package in Git; ignore older local archives.
+dist/*.zip
+!dist/js-beautifyy-pro-1.4.2.zip
