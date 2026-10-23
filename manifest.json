@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "JS Beautifyy Pro",
-  "version": "1.4.2",
-  "description": "Beautify JavaScript and locally extract endpoints, parameters, URLs, script files, and potential secrets.",
+  "version": "1.5.0",
+  "description": "Beautify JavaScript and locally detect endpoints, parameters, secrets, and potential security vulnerabilities.",
   "minimum_chrome_version": "120",
   "permissions": [
     "activeTab",

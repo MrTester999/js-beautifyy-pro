@@ -1,9 +1,9 @@
 {
   "name": "js-beautifyy-pro",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "private": true,
   "type": "module",
-  "description": "Local-first JavaScript beautifier and static asset intelligence workspace.",
+  "description": "Local-first JavaScript beautifier, secret scanner, and static security review workspace.",
   "scripts": {
     "vendor": "node scripts/vendor.mjs",
     "editor": "node scripts/editor-bundle.mjs",

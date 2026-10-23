@@ -7,10 +7,11 @@
 - Beautifies minified JavaScript using `js-beautify`.
 - Provides a CodeMirror 6 editor with JavaScript, TypeScript, and JSX syntax highlighting.
 - Extracts potential API endpoints, absolute URLs, WebSocket URLs, application routes, and JavaScript assets.
-- Extracts query parameters, runtime parameters, `URLSearchParams`, `FormData`, request fields, and JSON body fields.
-- Detects candidate secrets such as API keys, tokens, JWTs, private keys, database connection strings, and webhooks.
+- Extracts query parameters, runtime parameters, `URLSearchParams`, `FormData`, request fields, GraphQL variables, headers, and JSON body fields.
+- Detects provider-specific and generic secret candidates, including API keys, tokens, JWTs, private keys, database connection strings, webhooks, and high-entropy assigned credentials.
 - Masks sensitive values by default.
-- Identifies interesting paths and security-relevant JavaScript sources and sinks.
+- Identifies potential vulnerable code with rule IDs, CWE mappings, confidence, severity, and remediation guidance.
+- Maps interesting paths and security-relevant JavaScript sources for manual data-flow review.
 - Imports files, clipboard content, URLs, scripts from the current page, and directly opened JavaScript tabs.
 - Exports analysis results as JSON or TXT.
 - Runs formatting and analysis locally. Imported JavaScript is not executed.
@@ -33,7 +34,7 @@
 6. Choose this folder:
 
    ```text
-   /home/mo/bugbounty/09-tools/js-beautifyy-pro
+   js-beautifyy-pro
    ```
 
 7. Pin **JS Beautifyy Pro** from Chrome's Extensions menu.
@@ -47,7 +48,7 @@ The ZIP package is intended for distribution or Chrome Web Store submission. Chr
 Current package:
 
 ```text
-/home/mo/bugbounty/09-tools/js-beautifyy-pro/dist/js-beautifyy-pro-1.4.2.zip
+dist/js-beautifyy-pro-1.5.0.zip
 ```
 
 ## Analyze the current website
@@ -113,7 +114,8 @@ Remote fetching omits cookies and bypasses the browser cache. For an authenticat
 - **Scripts:** Referenced JavaScript assets.
 - **Sensitive:** Interesting administrative, internal, configuration, upload, debug, or authentication paths.
 - **Secrets:** Potential credentials and tokens. Values are masked unless explicitly revealed.
-- **Signals:** Security-relevant JavaScript patterns requiring manual review.
+- **Vulnerabilities:** Potentially unsafe sinks and configurations with severity, confidence, rule IDs, CWE references, and remediation guidance.
+- **Signals:** Security-relevant sources and browser APIs requiring manual data-flow review.
 
 Select a finding to jump to its source line.
 

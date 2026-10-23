@@ -6,7 +6,7 @@
 
   **A private, local-first Chrome workspace for beautifying and statically reviewing JavaScript.**
 
-  [![Version](https://img.shields.io/badge/version-1.4.2-7c3aed?style=flat-square)](manifest.json)
+  [![Version](https://img.shields.io/badge/version-1.5.0-7c3aed?style=flat-square)](manifest.json)
   [![Chrome MV3](https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?style=flat-square&logo=googlechrome&logoColor=white)](manifest.json)
   [![Privacy](https://img.shields.io/badge/analysis-local-16a34a?style=flat-square)](#privacy-and-safety)
   [![License](https://img.shields.io/badge/dependencies-MIT-0891b2?style=flat-square)](#third-party-components)
@@ -67,20 +67,22 @@ telemetry, or remote analysis service.
 |---|---|
 | **Endpoints** | `fetch`, Axios, XHR, WebSocket, EventSource, route definitions, request configurations |
 | **URLs** | HTTP(S), WebSocket, absolute network URLs |
-| **Parameters** | Query strings, `URLSearchParams`, `FormData`, `req.query`, `req.params`, `req.body`, JSON body keys |
+| **Parameters** | Query strings, `URLSearchParams`, `FormData`, request fields, GraphQL variables, headers, JSON body keys |
 | **Scripts** | Referenced JavaScript assets and chunks |
 | **Sensitive paths** | Admin, internal, auth, upload, debug, and configuration paths |
-| **Secrets** | API keys, tokens, JWTs, private keys, webhooks, and database connection strings |
-| **Signals** | Security-relevant JavaScript sources, sinks, and patterns for manual review |
+| **Secrets** | Provider tokens, API keys, JWTs, private keys, webhooks, connection strings, and high-entropy credentials |
+| **Vulnerabilities** | Potential DOM XSS, dynamic execution, command/SQL injection, weak TLS/crypto, insecure randomness, wildcard messaging, and sensitive storage |
+| **Signals** | Security-relevant sources and browser APIs for manual data-flow review |
 
 Potential secrets are masked by default and revealed only through an explicit
-local action.
+local action. Vulnerability candidates include severity, confidence, rule ID,
+CWE mapping, source location, and a concise remediation note.
 
 ## Installation
 
 ### Load the unpacked extension
 
-1. Download and extract [`js-beautifyy-pro-1.4.2.zip`](dist/js-beautifyy-pro-1.4.2.zip).
+1. Download and extract [`js-beautifyy-pro-1.5.0.zip`](dist/js-beautifyy-pro-1.5.0.zip).
 2. Open `chrome://extensions` in Chrome.
 3. Enable **Developer mode**.
 4. Select **Load unpacked**.
@@ -187,7 +189,8 @@ workspace actions until it is enabled again.
 
 - [Full Markdown documentation](DOCUMENTATION.md)
 - [Plain-text documentation](DOCUMENTATION.txt)
-- [Chrome extension package v1.4.2](dist/js-beautifyy-pro-1.4.2.zip)
+- [Chrome extension package v1.5.0](dist/js-beautifyy-pro-1.5.0.zip)
+- [Release history](CHANGELOG.md)
 
 ## Development
 
@@ -236,6 +239,6 @@ Dependency licenses are included in `vendor/`.
 ---
 
 <div align="center">
-  <strong>JS Beautifyy Pro v1.4.2</strong><br>
-  Local-first JavaScript formatting and static intelligence.
+  <strong>JS Beautifyy Pro v1.5.0</strong><br>
+  Local-first JavaScript formatting and security intelligence.
 </div>

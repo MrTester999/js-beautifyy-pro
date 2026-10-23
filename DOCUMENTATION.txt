@@ -1,4 +1,4 @@
-JS BEAUTIFYY PRO v1.4.2
+JS BEAUTIFYY PRO v1.5.0
 =======================
 
 DESCRIPTION
@@ -6,7 +6,8 @@ DESCRIPTION
 JS Beautifyy Pro is a privacy-focused Chrome extension that converts minified
 JavaScript into readable, syntax-highlighted code and performs local static
 analysis. It extracts candidate endpoints, URLs, parameters, scripts, sensitive
-paths, secrets, and security-relevant signals without executing imported code.
+paths, secrets, potential vulnerabilities, and security-relevant signals without
+executing imported code.
 
 INSTALLATION
 ------------
@@ -14,7 +15,7 @@ INSTALLATION
 2. Enable Developer mode.
 3. Select Load unpacked.
 4. Choose:
-   /home/mo/bugbounty/09-tools/js-beautifyy-pro
+   js-beautifyy-pro
 5. Pin JS Beautifyy Pro from the Extensions menu.
 
 If the extension is already loaded, press Reload after updating its files.
@@ -22,7 +23,7 @@ If the extension is already loaded, press Reload after updating its files.
 ZIP PACKAGE
 -----------
 Extract this ZIP before using Load unpacked:
-/home/mo/bugbounty/09-tools/js-beautifyy-pro/dist/js-beautifyy-pro-1.4.2.zip
+dist/js-beautifyy-pro-1.5.0.zip
 
 ANALYZE A WEBSITE
 -----------------
@@ -57,11 +58,12 @@ RESULT CATEGORIES
 -----------------
 Endpoints  - API paths, routes, request targets, and network destinations.
 URLs       - Absolute HTTP(S) and WebSocket URLs.
-Parameters - Query keys, FormData fields, request fields, and JSON body keys.
+Parameters - Query keys, FormData fields, GraphQL variables, headers, and body keys.
 Scripts    - Referenced JavaScript assets.
 Sensitive  - Interesting administrative, internal, debug, and auth paths.
-Secrets    - Potential API keys, tokens, JWTs, private keys, and credentials.
-Signals    - JavaScript sources, sinks, and patterns requiring manual review.
+Secrets    - Provider tokens, API keys, JWTs, private keys, and high-entropy credentials.
+Vulnerable - Potentially unsafe code with rule ID, CWE, severity, and remediation.
+Signals    - JavaScript sources and browser APIs requiring manual review.
 
 Secrets are masked by default. Findings are indicators and may include false
 positives; verify them manually.

@@ -8,7 +8,7 @@ const elements = Object.fromEntries([
   "downloadCode", "dropZone", "editorPosition", "editorStats", "emptyPaste", "emptyState",
   "emptyUpload", "exportJson", "exportText", "fileInput", "findingSearch", "findingTotal",
   "findings", "formattedTab", "indentSize", "lineNumbers", "metricEndpoints", "metricParameters",
-  "metricSecrets", "metricSignals", "newSource", "pasteSource", "preserveNewlines",
+  "metricSecrets", "metricVulnerabilities", "newSource", "pasteSource", "preserveNewlines",
   "resultScope", "revealSecrets", "runAnalysis", "scanPage", "severityCritical", "severityHigh",
   "severityMedium", "severityInfo", "sourceCount", "sourceKind",
   "sourceList", "sourceScope", "sourceTab", "toast", "uploadTrigger", "urlForm", "urlInput"
@@ -18,7 +18,7 @@ const MAX_FILE_BYTES = 8 * 1024 * 1024;
 const CATEGORIES = [
   ["all", "All"], ["endpoints", "Endpoints"], ["urls", "URLs"],
   ["parameters", "Parameters"], ["scripts", "Scripts"], ["sensitive", "Sensitive"],
-  ["secrets", "Secrets"], ["signals", "Signals"]
+  ["secrets", "Secrets"], ["vulnerabilities", "Vulnerabilities"], ["signals", "Signals"]
 ];
 
 const state = {
@@ -223,7 +223,7 @@ function renderFindings() {
   elements.metricEndpoints.textContent = counts.endpoints;
   elements.metricParameters.textContent = counts.parameters;
   elements.metricSecrets.textContent = counts.secrets;
-  elements.metricSignals.textContent = counts.signals;
+  elements.metricVulnerabilities.textContent = counts.vulnerabilities;
   const severity = { critical: 0, high: 0, medium: 0, info: 0 };
   for (const finding of all) severity[finding.severity in severity ? finding.severity : "info"] += 1;
   elements.severityCritical.textContent = severity.critical;
@@ -236,7 +236,7 @@ function renderFindings() {
   const filtered = all.filter((finding) => {
     if (state.category !== "all" && finding.group !== state.category) return false;
     if (!search) return true;
-    return `${finding.label} ${finding.value} ${finding.context} ${finding.sourceName}`.toLowerCase().includes(search);
+    return `${finding.label} ${finding.value} ${finding.context} ${finding.sourceName} ${finding.ruleId || ""} ${finding.cwe || ""} ${finding.recommendation || ""}`.toLowerCase().includes(search);
   });
 
   elements.findings.replaceChildren();
@@ -274,6 +274,20 @@ function renderFindings() {
       context.className = "finding-context";
       context.textContent = finding.context;
       card.append(head, value, context);
+      if (finding.ruleId || finding.cwe || finding.recommendation) {
+        const details = document.createElement("div");
+        details.className = "finding-details";
+        const metadata = [finding.ruleId, finding.cwe, finding.confidence ? `${finding.confidence} confidence` : ""].filter(Boolean);
+        const meta = document.createElement("span");
+        meta.textContent = metadata.join(" · ");
+        details.append(meta);
+        if (finding.recommendation) {
+          const recommendation = document.createElement("p");
+          recommendation.textContent = finding.recommendation;
+          details.append(recommendation);
+        }
+        card.append(details);
+      }
       elements.findings.append(card);
     }
   }
@@ -439,7 +453,8 @@ function exportData(format) {
   const findings = flattenedFindings().map((finding) => ({
     source: finding.sourceName, category: finding.group, label: finding.label,
     value: finding.group === "secrets" && !elements.revealSecrets.checked ? finding.masked : finding.value,
-    line: finding.line, severity: finding.severity, confidence: finding.confidence, context: finding.context
+    line: finding.line, severity: finding.severity, confidence: finding.confidence, ruleId: finding.ruleId,
+    cwe: finding.cwe, recommendation: finding.recommendation, context: finding.context
   }));
   if (!findings.length) return toast("No findings to export", true);
   const stamp = new Date().toISOString();
@@ -447,7 +462,7 @@ function exportData(format) {
     downloadText("js-beautifyy-findings.json", JSON.stringify({ generatedAt: stamp, localAnalysis: true, findings }, null, 2), "application/json");
   } else {
     const text = ["JS Beautifyy Pro — Local Static Analysis", `Generated: ${stamp}`, "", ...findings.map((finding) =>
-      `[${finding.category.toUpperCase()}] ${finding.label}\nSource: ${finding.source}:${finding.line}\nValue: ${finding.value}\nSeverity: ${finding.severity} · Confidence: ${finding.confidence}\n`
+      `[${finding.category.toUpperCase()}] ${finding.label}\nSource: ${finding.source}:${finding.line}\nValue: ${finding.value}\nSeverity: ${finding.severity} · Confidence: ${finding.confidence}${finding.ruleId ? `\nRule: ${finding.ruleId}${finding.cwe ? ` · ${finding.cwe}` : ""}` : ""}${finding.recommendation ? `\nRecommendation: ${finding.recommendation}` : ""}\n`
     )].join("\n");
     downloadText("js-beautifyy-findings.txt", text);
   }

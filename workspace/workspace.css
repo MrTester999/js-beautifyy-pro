@@ -254,6 +254,7 @@ kbd { display:inline-grid; place-items:center; min-width:19px; min-height:17px; 
 .category-tab[data-category="scripts"].active { border-color:#facc1588; background:#facc1512; color:#ffe985; }
 .category-tab[data-category="sensitive"].active { border-color:#fb923c88; background:#fb923c14; color:#ffc28d; }
 .category-tab[data-category="secrets"].active { border-color:#fb718588; background:#fb718514; color:#ffb1be; }
+.category-tab[data-category="vulnerabilities"].active { border-color:#ef444488; background:#ef444414; color:#fca5a5; }
 .category-tab[data-category="signals"].active { border-color:#34d39988; background:#34d39914; color:#9aebca; }
 .finding { position:relative; overflow:hidden; min-height:78px; padding:10px 10px 9px 12px; border-left-width:3px; transition:transform .14s,border-color .14s,background .14s,box-shadow .14s; }
 .finding::after { content:""; position:absolute; inset:0; opacity:.018; background:linear-gradient(120deg,currentColor,transparent 52%); pointer-events:none; }
@@ -261,10 +262,13 @@ kbd { display:inline-grid; place-items:center; min-width:19px; min-height:17px; 
 .finding.critical { border-left-color:#d946ef; }.finding.high { border-left-color:var(--red); }.finding.medium { border-left-color:var(--amber); }.finding.info { border-left-color:var(--blue); }
 .finding-head { min-width:0; }.finding-head strong { font-size:9px; }
 .finding-group { flex:0 0 auto; padding:3px 5px; border-radius:5px; background:#172336; color:#8ea0b8; font:normal 6.5px/1 monospace; text-transform:uppercase; }
-.group-endpoints .finding-group { background:#22d3ee15; color:#67e8f9; }.group-urls .finding-group { background:#60a5fa15; color:#93c5fd; }.group-parameters .finding-group { background:#a78bfa15; color:#c4b5fd; }.group-scripts .finding-group { background:#facc1514; color:#fde68a; }.group-sensitive .finding-group { background:#fb923c14; color:#fdba74; }.group-secrets .finding-group { background:#fb718514; color:#fda4af; }.group-signals .finding-group { background:#34d39914; color:#6ee7b7; }
+.group-endpoints .finding-group { background:#22d3ee15; color:#67e8f9; }.group-urls .finding-group { background:#60a5fa15; color:#93c5fd; }.group-parameters .finding-group { background:#a78bfa15; color:#c4b5fd; }.group-scripts .finding-group { background:#facc1514; color:#fde68a; }.group-sensitive .finding-group { background:#fb923c14; color:#fdba74; }.group-secrets .finding-group { background:#fb718514; color:#fda4af; }.group-vulnerabilities .finding-group { background:#ef444418; color:#fca5a5; }.group-signals .finding-group { background:#34d39914; color:#6ee7b7; }
 .severity-badge { flex:0 0 auto; padding:2px 4px; border-radius:4px; color:#718097; background:#131d2b; font:normal 6px/1 monospace; text-transform:uppercase; }
 .finding.critical .severity-badge { color:#f0abfc;background:#d946ef14;}.finding.high .severity-badge{color:#fda4af;background:#fb718514}.finding.medium .severity-badge{color:#fde68a;background:#f5b94214}.finding.info .severity-badge{color:#93c5fd;background:#4f8cff14}
 .finding-value { margin-top:7px; font-size:9px; }.finding-context { margin-top:2px; font-size:8px; }
+.finding-details { margin-top:7px; padding-top:6px; border-top:1px solid #172235; }
+.finding-details span { color:#8291a7; font:7px/1.4 "Cascadia Code",monospace; text-transform:uppercase; }
+.finding-details p { margin:4px 0 0; color:#9ba9bc; font-size:8px; line-height:1.45; }
 .export-bar button { display:flex; align-items:center; justify-content:center; gap:6px; min-height:34px; transition:background .14s,border-color .14s,transform .14s; }.export-bar button:hover { transform:translateY(-1px); border-color:#364861; background:#142035; }.export-bar span { color:var(--cyan); font-family:monospace; }
 .shortcut-hint { position:fixed; z-index:8; left:50%; bottom:7px; display:flex; align-items:center; gap:4px; transform:translateX(-50%); padding:4px 7px; border:1px solid #1f2b3e; border-radius:8px; background:rgba(8,13,22,.9); color:#4f5f75; font-size:6.5px; opacity:.52; pointer-events:none; backdrop-filter:blur(8px); }
 .shortcut-hint i { width:1px; height:12px; margin:0 3px; background:#273449; }.shortcut-hint kbd { min-width:16px; min-height:14px; font-size:6px; }
